@@ -15,6 +15,8 @@ public class TicTacToeGame {
 		boardCreation();
 		//for user to choose 'X' or 'O' mark
 		choosingXorO();
+		//for display the current board
+		currentBoard();
 	}
 	
 	/**
@@ -48,5 +50,30 @@ public class TicTacToeGame {
 			System.out.println("Your input is invalid");
 			choosingXorO();
 		}
+	}
+	
+	/**
+	 * Displays board layout
+	 * Elements are assigned with marks and numbers
+	 */
+	private static void displayingBoard() {
+		System.out.println("\n  "+element[1]+" | "+element[2]+" | "+element[3]+" ");
+		System.out.println(" ----------- ");
+		System.out.println("  "+element[4]+" | "+element[5]+" | "+element[6]+" ");
+		System.out.println(" ----------- ");
+		System.out.println("  "+element[7]+" | "+element[8]+" | "+element[9]+" \n");
+	}
+	
+	/**
+	 * Assigning elements with numbers if it is not marked
+	 * @param element[]
+	 */
+	private static void currentBoard() {
+		for (int i=1;i<10;i++) {
+			if (element[i] !='X'&&element[i] !='O') {
+				element[i]=(char) (i+'0');
+			}
+		}
+	    displayingBoard();
 	}
 }
