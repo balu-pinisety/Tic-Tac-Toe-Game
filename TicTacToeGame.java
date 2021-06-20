@@ -9,6 +9,7 @@ public class TicTacToeGame {
 	//variables
 	private static char[] element;
 	static char userMark, computerMark;
+	static int userNumber;
 	
 	public static void main(String[] args) {
 		//for creating empty elements
@@ -17,6 +18,8 @@ public class TicTacToeGame {
 		choosingXorO();
 		//for display the current board
 		currentBoard();
+		//for calling the user for number
+		userCall();
 	}
 	
 	/**
@@ -75,5 +78,19 @@ public class TicTacToeGame {
 			}
 		}
 	    displayingBoard();
+	}
+	
+	/**
+	 * Asking user for a number and checks whether the number is with in the board
+	 * @param userNumber
+	 */
+	private static void userCall() {
+	    System.out.println("\nEnter a number from board to make the mark:\n");
+	    userNumber = Utility.getUserInteger();
+	    if (userNumber < 1 || userNumber > 9) {
+	    	currentBoard();
+	    	System.out.println("Your input is Invalid");
+	    	userCall();
+	    }
 	}
 }
