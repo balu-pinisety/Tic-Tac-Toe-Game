@@ -9,19 +9,31 @@ public class TicTacToeGame {
 	//variables
 	private static char[] element;
 	static char userMark, computerMark;
-	static int userNumber;
+	static int userNumber, computerNumber;
+	static int turn = 1, flag = 0;
 	
 	public static void main(String[] args) {
+		System.out.println("*************************\nWelcome to TicTacToe Game");
 		//for creating empty elements
 		boardCreation();
+		//to display the game layout
+		displayingBoard();
 		//for user to choose 'X' or 'O' mark
 		choosingXorO();
-		//for display the current board
-		currentBoard();
-		//for calling the user for number
-		userCall();
-		//for making the mark on user number
-		userMove();
+		// For making toss to check who plays first
+		tossCoin();
+		// to to play the game until some one wins i.e. flag=1
+		while(flag==0) {
+			if((turn+1)%2==0) {
+				//for display the current board
+				currentBoard();
+				//for calling the user for number
+				userCall();
+				//for making the mark on user number
+				userMove();
+				turn++;
+			}
+		}
 	}
 	
 	/**
@@ -55,6 +67,7 @@ public class TicTacToeGame {
 			System.out.println("Your input is invalid");
 			choosingXorO();
 		}
+		System.out.println("\nUser Mark: '"+userMark+"' and Computer Mark: '"+computerMark+"'");
 	}
 	
 	/**
@@ -109,5 +122,41 @@ public class TicTacToeGame {
 		} else {
 			element[userNumber]=userMark;
 		}
+	}
+	
+	/**
+	 * Determining who's is starting, user or computer by tossing a coin
+	 * @param Head and Tail
+	 */
+	private static void tossCoin() {   
+	    System.out.println("\nMaking a toss to check who plays first\nChoose 1 for Head or 2 for Tail");
+	    int option = Utility.getUserInteger();;
+	    if ( option==1 || option==2 ) {
+	    	int flip = Utility.getRandomInt(2)+1;
+	    	if (flip==1) {
+	    		System.out.println("\nBy tossing Coin it shows HEAD\n");
+	    	} else {
+	    		System.out.println("\nBy tossing Coin it shows TAIL\n");
+	    	}
+	    	if (flip == option) {
+	    		System.out.println("User will start the game\n");
+	    	} else {
+	    		System.out.println("Computer will start the game\n");
+	    		computerFirstTurn();
+	    	}
+	    } else {
+	    	System.out.println("\nInvalid input Again");
+	    	tossCoin();
+	    }
+	}
+	
+	/**
+	 * Making Computer First Turn as random from 1 to 9 and makes the mark
+	 * @param compuerNumber
+	 */
+	public static void computerFirstTurn() {
+		computerNumber = Utility.getRandomInt(9)+1;
+		element[computerNumber]=computerMark;
+		System.out.println("Computer choses '"+computerNumber+"' now user turn");
 	}
 }
