@@ -57,6 +57,12 @@ public class TicTacToeGame {
 					flag=0;
 					return;
 				}
+				flag=computerCorner();
+				if (flag==1) {
+					turn++;
+					flag=0;
+					return;
+				}
 			}
 		}
 	}
@@ -261,6 +267,23 @@ public class TicTacToeGame {
 			element[index]=computerMark;
 			System.out.println("Computer goes for '"+index+"' to block User");
 			flag=1;
+		}
+		return flag;
+	}
+	
+	/**
+	 * Making computer to choose corner
+	 * @return flag 
+	 */
+	private static int computerCorner() {
+		int corner[]={7,3,1,9};
+		for(int i=0;i<4;i++) {
+			if(element[corner[i]] != 'X' && element[corner[i]] != 'O') {
+				element[corner[i]]=computerMark;
+				System.out.println("Cmputer choice is '"+corner[i]+"'");
+				flag=1;
+				break;
+			}
 		}
 		return flag;
 	}
